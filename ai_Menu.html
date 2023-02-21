@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <style>
+    /* Simple Reset CSS */
+    * {
+      margin: 0; padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      color: #58666e; /*contents 글씨*/
+      background-color: #FCBC66; /*contents 배경*/
+      -webkit-font-smoothing: antialiased;
+      -webkit-text-size-adjus: 100%;  /* iphone font size 변경 방지 */
+    }
+    li { list-style: none; }        /*목록의 원을 없앰*/
+    a { text-decoration: none; }    /*링크를 연결하면 글씨변경이 일어나지 않음*/
+    h1, h2, h3, h4, h5, h6, p {     /*제목이나 글씨 여백을 줌*/
+      margin: 10px 5px;
+    }
+    h1 { font-size: 1.8em; }
+    button {width: 43px; height: 43px}
+    #wrap {
+      width: 100%;
+      /* margin-top = header height */
+      margin-top: 60px;
+    }
+
+    /* Navigation bar */
+    header {
+      /* for sticky header */
+      position: fixed;    /*top부분 위치 고정*/
+      top: 0;
+
+      width: 100%;
+      height: 60px;
+      z-index: 2000;          /*레이아웃 숫자 높을수록 먼저보임*/
+      background-color: #8DC6BF;  /*headr부분 배경색*/
+      box-shadow: 0 2px 2px rgba(0, 0, 0, 0.05), 0 1px 0 rgba(0, 0, 0, 0.05);
+    }
+    .logo {
+      display: inline-block;    /*속성*/
+      height: 36px;             /*높이*/
+      margin: 12px 0 12px 25px; /*빈공간*/
+    }
+    .logo > img { height: 36px; }/*로고 크기*/
+    nav {
+      float: right;               /*위치조절*/
+    }
+    .nav-items {
+      margin-right: 20px;
+    }
+    .nav-items > li {
+      display: inline-block;  /* 가로정렬 */
+    }
+    .nav-items > li > a {
+      /* for Vertical Centering */
+      line-height: 60px;
+      padding: 0 30px;
+      color: rgba(255, 255, 255, 100);/*기본 headr 글씨 색*/
+    }
+    .nav-items > li > a:hover {
+      color: rgba(88, 64, 83, 0.2);/*선택시 headr 글씨 색*/
+    }
+
+    /* contents */
+    /* clearfix */
+    #content-wrap:after {
+      content: "";
+      display: block;
+      clear: both;
+    }
+    aside {
+      /* for fixed side bar */
+      position: fixed;
+      top: 60px;
+      bottom: 0;
+      width: 200px;  /* 너비 고정 */
+      padding-top: 25px;
+      background-color: #333;/*목록 배경*/
+    }
+    #favor_font{
+      font-weight : bold;
+}
+#favor_font a:visited{
+      color: black;
+}
+#favor_font a:hover{
+      background-color: #dee5e7;
+      transition: all 0.2s ;
+      padding: 10px;
+      padding-left: 25%;
+      padding-right: 25%;
+}
+    /* aside navigation */
+    aside > ul {
+      width: 200px;
+    }
+    aside > ul > li > a {
+      display: block;
+      color: #fff;
+      padding: 10px 0 10px 20px;
+    }
+    aside > ul > li > a.active {
+      background-color: #F97B4F;
+    }
+    aside > ul > li > a:hover:not(.active) {
+      background-color: #555;
+    }
+    aside > h1 {
+      padding: 20px 0 20px 20px;
+      color: #fff;
+    }
+    /* Section */
+    section {
+      width: 88.3%;
+      float: right;
+      /* aside width */
+      /*margin-left: 200px;*/
+    }
+    article {
+      height: 900px;
+      margin: 25px;
+      padding: 25px;
+      background-color: white;
+    }
+    .inf_map{
+      width:78%;
+      height:900px;
+      position: relative;
+    }
+    .inf_no{
+      position:absolute;
+    }
+    .alam {
+      width:1400px;
+      height:89%;
+    }
+    .alam_img{
+      width:290px;
+      height:290px;
+    }
+    #map {
+        height: 400px;
+        width: 100%;
+      }
+    /* footer */
+    footer {
+      /* footer를 aside위에 올리기 위해 사용(부유객체) */
+      position: fixed;
+      height: 60px;
+      width: 100%;
+      padding: 0 25px;
+      line-height: 60px;
+      color: #8a8c8f;
+      border-top: 1px solid #dee5e7;
+      background-color: #f2f2f2;
+      bottom : 0;
+    }
+  </style>
+</head>
+<body>
+  <div id="wrap">
+    <header>
+      <a class="logo" href="#home"><img src="F:\Ai_Friends_School_HTML\예시사진\Logo.png"></a>
+      <nav>
+        <ul class="nav-items">
+          <li><a href="#home" class="home">홈</a></li>
+          <li><a href="#login" class="login">로그인</a></li>
+          <li><a href="#join" class="join">회원가입</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <div id="content-wrap">
+      <aside>
+        <h1>무서운 <br>날씨 알리미</h1>
+        <ul>
+          <li><a href="#directions" class="directions">길찾기</a></li>
+          <li><a href="#favorites" class="favorites">즐겨찾기</a></li>
+          <li><a href="#information" class="information">교통정보 확인</a></li>
+          <li><a href="#reminder" class="reminder">실시간 알리미</a></li>
+        </ul>
+      </aside>
+
+      <section>
+        <article id="home">
+          <img src="F:\Ai_Friends_School_HTML\예시사진\homeImg.png" alt="My Image" width="100%" height="100%">
+        </article>
+        <center>
+        <article id="login" style="display: none;">
+          <h1 style = "float: left" >로그인</h1>
+          <br> <br> <br> <br> <br>
+          <div style="margin: 0 auto;">
+          <a href="intro1.html"><img src="F:\Ai_Friends_School_HTML\예시사진\Logo.png" alt="logo" style = "width: 20%; padding: 20px;" ></a>
+
+              <div style="border: 1px solid #222; width: 500px; height: 100px; padding: 10px">
+                  <br>
+                  <label>&nbsp;&nbsp;&nbsp;아이디: <input type="text" id="user_id" size="10"></label><br>
+                  <label>비밀번호: <input type="password" id="user_pw" size="10"></label>
+                  <br>
+              </div>
+              <br>
+              <label><input  id="d" type="checkbox" value="로그인 상태 유지">로그인 상태 유지</label>
+              <label><input type="checkbox" value="아이디 저장">아이디 저장</label>
+              <br><br>
+              <input class="login" type="submit"  value="로그인">
+              <p>
+                  아이디 찾기&nbsp; &nbsp; 비밀번호 찾기
+              </p>
+          </div>
+        </article>
+
+      </center>
+
+        <article id="join" style="display: none;">
+          <h1 style = "float: left ">회원가입</h1>
+        </article>
+
+        <article id="directions" style="display: none; ">
+          <h1 style = "float: left ; color: #333">길찾기</h1>
+          
+          <button onclick ="search()" style = "margin-top: 11px; float: right; margin-left: 2px">검색</button>
+
+          <form style = "margin-top: 8px; float: right">
+            <label>출발지 입력 : </label>
+            <input id = "search_start" type="search" placeholder="출발지를 입력하세요">
+            <br>
+            <label>도착지 입력 : </label>
+            <input id="search_end" type="search" placeholder="도착지를 입력하세요">
+            <br>
+          </form>
+          
+          <div id = "inf_map" style = "width: 100%; height: 92.3%; float: right ;">
+            <img src="F:\Ai_Friends_School_HTML\예시사진\Findmap.png" alt="Image" style="width : 100%; height : 100%;">
+          </div>
+          <div id = "inf_map_mirim_seoul" style = "width: 100%; height: 92.3%; float: right ; display:none;">
+            <img src="F:\Ai_Friends_School_HTML\예시사진\FindMap_mirim_seoul.png" alt="Image" style="width : 100%; height : 100%;">
+          </div>
+        </article>
+
+        <article id="favorites" style="display: none;padding:0px;">
+          <div style = "width: 22%; height: 100%; background: #FCBC66; float: left ;">
+          <h1 style = "color: #333;padding:25px;">즐겨찾기</h1>
+            <form style = "margin-top: 8px; float: left;">
+              &nbsp;  
+              <label>지역 입력 : </label>
+              <input type="search" placeholder="지역을 입력하세요">
+              <br>
+            </from>
+            <br><br>
+            <ul id = "favor_font">
+              <li><a href="#inf_1" class="inf_1">동대문역</a></li><br>
+              <li><a href="#inf_2" class="inf_2">수원역</a></li><br>
+              <li><a href="#inf_3" class="inf_3">강남역</a></li><br>
+              <li><a href="#inf_4" class="inf_4">구로디지털단지역</a></li><br>
+              <li><a href="#inf_5" class="inf_5">사당역</a></li><br>
+            </ul>
+          </div>
+          <div>
+            <iframe id = "inf" class = "inf_map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3166.570186745012!2d126.70068995131655!3d37.47086897971693!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357b7bf893bd8917%3A0x8567e402aee25e0b!2z64-Z7JWU7Jet!5e0!3m2!1sko!2skr!4v1676817846117!5m2!1sko!2skr"
+               style="border:0;float: right" loading="lazy" referrerpolicy="no-referrer-when-downgrade; ">
+            </iframe>
+            <iframe id = "inf_1" class = "inf_map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3162.3886933742588!2d127.00888587238694!3d37.569463939292774!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca33b0e081695%3A0x673c8e95bcff58c2!2z64-Z64yA66y4!5e0!3m2!1sko!2skr!4v1676818626564!5m2!1sko!2skr"
+               style="border:0;float: right; display: none;" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+            <iframe id = "inf_2" class = "inf_map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12700.84122246016!2d126.98292820781246!3d37.2664398!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357b431dc95bf41f%3A0x403c6958afecff71!2z7IiY7JuQ7Jet!5e0!3m2!1sko!2skr!4v1676824316003!5m2!1sko!2skr"
+               style="border:0;float: right; display: none;" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+            <iframe id = "inf_3" class = "inf_map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6330.80285087961!2d127.02310267457116!3d37.49844933119749!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca1598c361b2b%3A0xdbf9af292beff3c!2z6rCV64Ko!5e0!3m2!1sko!2skr!4v1676824340605!5m2!1sko!2skr"
+               style="border:0;float: right; display: none;" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+            <iframe id = "inf_4" class = "inf_map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3166.000387093345!2d126.89956631486422!3d37.48431723659103!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357c9e3066590097%3A0xe950e38f0b5836cf!2z6rWs66Gc65SU7KeA7YS464uo7KeA!5e0!3m2!1sko!2skr!4v1676824357147!5m2!1sko!2skr"
+               style="border:0;float: right; display: none;" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+               <iframe id = "inf_5" class = "inf_map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3166.3287529629924!2d126.979452314864!3d37.47656773703405!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca04eb52a7e6f%3A0x7ca7a3affc5f48d0!2z7IKs64u5!5e0!3m2!1sko!2skr!4v1676824293850!5m2!1sko!2skr"
+               style="border:0;float: right; display: none;" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+          </div>
+        </article>
+
+        <article id="information" style="display: none;padding:0px;">
+          <div style = "width: 22%; height: 100%; background: #FCBC66; float: left ;">
+            <h1 style = "color: #333;padding:25px;">교통정보 확인</h1>
+            <form style = "margin-top: 8px; float: left;">
+              
+              <label>대중교통 입력 : </label>
+              <input type="text" name="info_1" id="infor" placeholder="ex. 1호선 또는 5522번">
+              <input type="button" value="검색" onclick="say()">
+              <br>
+            </from>
+            
+          </div>
+          <div id = "search_Line1" style = "width: 78%; height: 100%; float: right ; display:none;">
+            <img src="F:\Ai_Friends_School_HTML\예시사진\Line1_map.png" alt="Image" style="width : 100%; height : 100%;">
+          </div>
+          <div id = "search_Line2" style = "width: 78%; height: 100%; float: right ; display:none;">
+             <img src="F:\Ai_Friends_School_HTML\예시사진\Line2_map.png" alt="Image" style="width : 100%; height : 100%;">
+          </div>
+          <div id = "search_Line3" style = "width: 78%; height: 100%; float: right ; display:none;">
+            <img src="F:\Ai_Friends_School_HTML\예시사진\Line3_map.png" alt="Image" style="width : 100%; height : 100%;">
+          </div>
+          <div id = "search_Line4" style = "width: 78%; height: 100%; float: right ; display:none;">
+            <img src="F:\Ai_Friends_School_HTML\예시사진\Line4_map.png" alt="Image" style="width : 100%; height : 100%;">
+          </div>
+          
+        </article>
+        <article id="reminder" style="display: none;">
+          <center>
+
+            <h1 style = "font-size:50px">실시간 알리미</h1>
+            <br>
+            
+          </center>
+          <iframe class = "alam" src ="alam.html">
+            
+          </iframe>
+            
+
+        </article>
+      </section>
+      <!-- end of content-wrap -->
+    </div>
+    <footer>© Copyright 2023 요타B</footer>
+  <!-- end of wrap   -->
+  </div>
+  
+</body>
+<script>
+  
+  document.querySelector('.inf_1').onclick = function(){ //홈
+          document.querySelector('#inf_1').style.display = "block";
+          document.querySelector('#inf_2').style.display='none';
+          document.querySelector('#inf_3').style.display='none';
+          document.querySelector('#inf_4').style.display='none';
+          document.querySelector('#inf_5').style.display='none';
+          document.querySelector('#inf').style.display='none';
+  }
+  document.querySelector('.inf_2').onclick = function(){ //홈
+          document.querySelector('#inf_2').style.display = "block";
+          document.querySelector('#inf_1').style.display='none';
+          document.querySelector('#inf_3').style.display='none';
+          document.querySelector('#inf_4').style.display='none';
+          document.querySelector('#inf_5').style.display='none';
+          document.querySelector('#inf').style.display='none';
+  }
+  document.querySelector('.inf_3').onclick = function(){ //홈
+          document.querySelector('#inf_3').style.display = "block";
+          document.querySelector('#inf_2').style.display='none';
+          document.querySelector('#inf_1').style.display='none';
+          document.querySelector('#inf_4').style.display='none';
+          document.querySelector('#inf_5').style.display='none';
+          document.querySelector('#inf').style.display='none';
+  }
+  document.querySelector('.inf_4').onclick = function(){ //홈
+          document.querySelector('#inf_4').style.display = "block";
+          document.querySelector('#inf_2').style.display='none';
+          document.querySelector('#inf_3').style.display='none';
+          document.querySelector('#inf_1').style.display='none';
+          document.querySelector('#inf_5').style.display='none';
+          document.querySelector('#inf').style.display='none';
+  }
+  document.querySelector('.inf_5').onclick = function(){ //홈
+          document.querySelector('#inf_5').style.display = "block";
+          document.querySelector('#inf_2').style.display='none';
+          document.querySelector('#inf_3').style.display='none';
+          document.querySelector('#inf_4').style.display='none';
+          document.querySelector('#inf_1').style.display='none';
+          document.querySelector('#inf').style.display='none';
+  }
+
+  document.querySelector('.home').onclick = function(){ //홈
+          document.querySelector('#home').style.display = "block";
+          document.querySelector('#directions').style.display='none';
+          document.querySelector('#favorites').style.display='none';
+          document.querySelector('#information').style.display='none';
+          document.querySelector('#reminder').style.display='none';
+          document.querySelector('#login').style.display='none';
+          document.querySelector('#join').style.display='none';
+  
+          document.querySelector('.information').style.background = "#333";
+          document.querySelector('.favorites').style.background = "#333";
+          document.querySelector('.directions').style.background = "#333";
+          document.querySelector('.reminder').style.background = "#333";
+  }
+  document.querySelector('.login').onclick = function(){ //로그인
+          document.querySelector('#login').style.display = "block";
+          document.querySelector('#directions').style.display='none';
+          document.querySelector('#favorites').style.display='none';
+          document.querySelector('#information').style.display='none';
+          document.querySelector('#reminder').style.display='none';
+          document.querySelector('#home').style.display='none';
+          document.querySelector('#join').style.display='none';
+  
+          document.querySelector('.information').style.background = "#333";
+          document.querySelector('.favorites').style.background = "#333";
+          document.querySelector('.directions').style.background = "#333";
+          document.querySelector('.reminder').style.background = "#333";
+  }
+  document.querySelector('.join').onclick = function(){ //회원가입
+          document.querySelector('#join').style.display = "block";
+          document.querySelector('#directions').style.display='none';
+          document.querySelector('#favorites').style.display='none';
+          document.querySelector('#information').style.display='none';
+          document.querySelector('#reminder').style.display='none';
+          document.querySelector('#home').style.display='none';
+          document.querySelector('#login').style.display='none';
+  
+          document.querySelector('.information').style.background = "#333";
+          document.querySelector('.favorites').style.background = "#333";
+          document.querySelector('.directions').style.background = "#333";
+          document.querySelector('.reminder').style.background = "#333";
+  }
+
+  document.querySelector('.directions').onclick = function(){ //길찾기
+          document.querySelector('#directions').style.display = "block";
+          document.querySelector('#favorites').style.display='none';
+          document.querySelector('#information').style.display='none';
+          document.querySelector('#reminder').style.display='none';
+          document.querySelector('#home').style.display='none';
+          document.querySelector('#login').style.display='none';
+          document.querySelector('#join').style.display='none';
+
+          document.querySelector('.directions').style.background = "#F97B4F";
+          document.querySelector('.favorites').style.background = "#333";
+          document.querySelector('.information').style.background = "#333";
+          document.querySelector('.reminder').style.background = "#333";
+  }
+  
+  document.querySelector('.favorites').onclick = function(){ //즐겨찾기
+          document.querySelector('#favorites').style.display='block';
+          document.querySelector('#directions').style.display = "none";
+          document.querySelector('#information').style.display='none';
+          document.querySelector('#reminder').style.display='none';
+          document.querySelector('#home').style.display='none';
+          document.querySelector('#login').style.display='none';
+          document.querySelector('#join').style.display='none';
+
+          document.querySelector('.favorites').style.background = "#F97B4F";
+          document.querySelector('.directions').style.background = "#333";
+          document.querySelector('.information').style.background = "#333";
+          document.querySelector('.reminder').style.background = "#333";
+  }
+  document.querySelector('.information').onclick = function(){ //교통정보 확인
+          document.querySelector('#information').style.display = "block";
+          document.querySelector('#favorites').style.display='none';
+          document.querySelector('#directions').style.display='none';
+          document.querySelector('#reminder').style.display='none';
+          document.querySelector('#home').style.display='none';
+          document.querySelector('#login').style.display='none';
+          document.querySelector('#join').style.display='none';
+
+          document.querySelector('.information').style.background = "#F97B4F";
+          document.querySelector('.favorites').style.background = "#333";
+          document.querySelector('.directions').style.background = "#333";
+          document.querySelector('.reminder').style.background = "#333";
+  }
+  document.querySelector('.reminder').onclick = function(){ //실시간 알리미
+          document.querySelector('#reminder').style.display='block';
+          document.querySelector('#directions').style.display = "none";
+          document.querySelector('#favorites').style.display='none';
+          document.querySelector('#information').style.display='none';
+          document.querySelector('#home').style.display='none';
+          document.querySelector('#login').style.display='none';
+          document.querySelector('#join').style.display='none';
+
+          document.querySelector('.reminder').style.background = "#F97B4F";
+          document.querySelector('.favorites').style.background = "#333";
+          document.querySelector('.information').style.background = "#333";
+          document.querySelector('.directions').style.background = "#333";
+  }
+  
+
+  function say(){
+        var anText_sub1 = document.getElementById('infor').value;
+
+        // alert( anText_sub1 + " 테스트");
+        if( anText_sub1 == "1호선"){
+          document.querySelector('#search_Line1').style.display = "block";
+          document.querySelector('#search_Line2').style.display='none';
+          document.querySelector('#search_Line3').style.display='none';
+          document.querySelector('#search_Line4').style.display='none';
+        }else if(anText_sub1 == "2호선"){
+          document.querySelector('#search_Line2').style.display = "block";
+          document.querySelector('#search_Line1').style.display='none';
+          document.querySelector('#search_Line3').style.display='none';
+          document.querySelector('#search_Line4').style.display='none';
+        }else if(anText_sub1 == "3호선"){
+          document.querySelector('#search_Line3').style.display = "block";
+          document.querySelector('#search_Line1').style.display='none';
+          document.querySelector('#search_Line2').style.display='none';
+          document.querySelector('#search_Line4').style.display='none';
+        }else if(anText_sub1 == "4호선"){
+          document.querySelector('#search_Line4').style.display = "block";
+          document.querySelector('#search_Line1').style.display='none';
+          document.querySelector('#search_Line2').style.display='none';
+          document.querySelector('#search_Line3').style.display='none';
+        }else{
+            alert("에러에러");
+        }
+    }
+function search(){
+  var search_start = document.getElementById('search_start').value;
+  var search_end = document.getElementById('search_end').value;
+    if( search_start == "미림여자정보과학고" || search_end == "서울역"){
+       document.querySelector('#inf_map_mirim_seoul').style.display = "block";
+       document.querySelector('#inf_map').style.display='none';
+    }else if( search_start == "미림여정" || search_end == "서울역"){
+       document.querySelector('#inf_map_mirim_seoul').style.display = "block";
+       document.querySelector('#inf_map').style.display='none';
+    }else{
+       alert("에러에러");
+    }
+}
+</script>
+
+</html>
